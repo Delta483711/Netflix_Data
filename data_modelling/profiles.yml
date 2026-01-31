@@ -1,0 +1,12 @@
+data_modelling:
+  outputs:
+    dev:
+      dbname: netflix
+      host: '132'
+      pass: '123'
+      port: 5432
+      schema: raw
+      threads: 1
+      type: postgres
+      user: '123'
+  target: dev

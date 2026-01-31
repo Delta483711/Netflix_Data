@@ -9,6 +9,7 @@
 ### Step 2
 
 Create a Virtual Environment within the desired directory.
+    "dbt_env" this is the name of the virtual entirment
 
     python -m venv dbt_env
 
@@ -42,6 +43,8 @@ Update to the latest version
 ### Step 6
 
 Create DBT Project 
+
+Ensure you are in the directory that you want the project to live in 
         
     dbt init first_project
 
