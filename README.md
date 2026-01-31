@@ -1,7 +1,7 @@
 # Netflix_Data
 
 **Project Summary:**  
-This project analyzes Netflix movies and shows by building a complete data pipeline from raw dataset ingestion to insightful dashboards. Using DBT for transformation and testing, a cloud warehouse for storage, and Power BI for visualization, this project uncovers trends in genres, ratings, durations, and content additions over time. It demonstrates skills in data modeling, analytics, and dashboard storytelling, making it a portfolio-ready example of end-to-end data analysis.
+This project analyses Netflix movies and shows by building a complete data pipeline from raw dataset ingestion to insightful dashboards. Using DBT for transformation and testing, a cloud warehouse for storage, and Power BI for visualisation, this project uncovers trends in genres, ratings, durations, and content additions over time. It demonstrates skills in data modelling, analytics, and dashboard storytelling, making it a portfolio-ready example of end-to-end data analysis.
 
 ---
 
@@ -16,7 +16,7 @@ This project analyzes Netflix movies and shows by building a complete data pipel
 - Create a **raw table** (e.g., `netflix_raw`) with proper data types:  
   - `release_year` → `integer`  
   - `rating` → `decimal`/`float`  
-  - `duration` → `integer` or `string` (normalized later)  
+  - `duration` → `integer` or `string` (normalised later)  
 - Optional: create a **staging layer** (`netflix_staging`) for initial cleaning and normalization.
 
 ---
@@ -24,7 +24,7 @@ This project analyzes Netflix movies and shows by building a complete data pipel
 ## Step 3: Transform & Model in DBT
 - Create a **DBT project** connected to your warehouse.  
 - **Transformations / Models:**  
-  - Normalize multi-genre entries (split into separate rows)  
+  - Normalise multi-genre entries (split into separate rows)  
   - Calculate `age_of_show` = `current_year – release_year`  
   - Flag trending shows based on recent addition + high rating  
   - Create a **fact table** (e.g., `netflix_fact`) and **dimension tables** (`genre`, `actor`, `director`)  
@@ -39,7 +39,7 @@ This project analyzes Netflix movies and shows by building a complete data pipel
 ## Step 4: Connect Power BI
 - Connect Power BI to the **warehouse** (Neon/Postgres).  
 - Load **transformed/mart model**, not raw data.  
-- **Dashboards / Visualizations:**  
+- **Dashboards / Visualisations:**  
   - Top genres by number of movies (bar chart)  
   - Average rating over years (line chart)  
   - Trending shows (table with image thumbnails)  
