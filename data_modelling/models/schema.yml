@@ -1,4 +1,41 @@
-
 version: 2
 
 models:
+  - name: stg_netflix
+    description: "This model contains the schema for Netflix data including shows, ratings, and user interactions."
+    columns:
+      - name: show_id
+        description: "Unique identifier for each show."
+        tests:
+          - not_null
+          - unique
+
+      - name: category
+        description: "Category or genre of the show."
+        tests:
+          - not_null
+      - name: title 
+        description: "Title of the show."
+        tests:
+          - not_null  
+      - name: director    
+        description: "Director of the show."
+      - name: actors
+        description: "Main actors members of the show."
+      - name: country
+        description: "Country where the show was produced."
+      - name: release_date
+        description: "date when the show was released."
+      - name: rating
+        description: "Content rating of the show."
+      - name: duration
+        description: "Duration of the show."    
+      - name: type
+        description: "Type of content (e.g., Movie, TV Show)."
+        tests:
+          - not_null 
+      - name: description
+        description: "Brief description or synopsis of the show."
+        tests:
+          - not_null
+

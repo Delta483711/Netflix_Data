@@ -6,21 +6,21 @@
 WITH raw_netflix AS (
 
 SELECT 
-    show_id as Id,
-    Category,
-    title,
-    director,
-    cast,
-    country,
-    release_added,
-    rating,
-    duration,
-    type, 
-    description
+    "Show_Id" AS show_id, 
+    "Category" AS category,
+    "Title" AS title,
+    COALESCE("Director", 'Unknown') AS director,
+    COALESCE("Cast", 'Unknown') AS actors,
+    COALESCE("Country", 'Unknown') AS country,
+    "Release_Date" AS release_date,
+    "Rating" AS rating,
+    "Duration" AS duration,
+    "Type" AS type,
+    "Description" AS description    
 FROM 
-    raw.netflix_data
+    raw."NetflixData"
 )
 
-SELECT * FROM raw_netflix;
+SELECT * FROM raw_netflix
 
 
