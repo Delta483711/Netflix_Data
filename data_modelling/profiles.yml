@@ -5,7 +5,7 @@ data_modelling:
       threads: 10
       host: "{{ env_var('DB_HOST') }}"
       user: "{{ env_var('DB_USER') }}"
-      password: "{{ env_var('DB_PASS') }}"
+      password: "{{ env_var('DB_PASSWORD') }}"
       dbname: "{{ env_var('DB_DBNAME') }}"
       port: 5432 
       schema: raw

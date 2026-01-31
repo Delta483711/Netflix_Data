@@ -28,3 +28,120 @@ Happy modeling!
 [0m09:07:31.930385 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000029E313F9BA0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000029E3134DA30>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000029E310EFCE0>]}
 [0m09:07:31.930640 [debug] [MainThread]: Flushing usage events
 [0m09:07:32.448298 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m09:16:59.526954 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002485B658C20>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002485D597ED0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002485D597B10>]}
+
+
+============================== 09:16:59.530213 | 74ad4a51-ff43-42cd-86f7-f985fb74331d ==============================
+[0m09:16:59.530213 [info ] [MainThread]: Running with dbt=1.11.2
+[0m09:16:59.530699 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'None', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'C:\\Users\\Micha\\.dbt', 'invocation_command': 'dbt debug', 'use_colors': 'True', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'log_path': 'logs'}
+[0m09:16:59.552723 [info ] [MainThread]: dbt version: 1.11.2
+[0m09:16:59.553111 [info ] [MainThread]: python version: 3.13.9
+[0m09:16:59.553644 [info ] [MainThread]: python path: P:\Netflix_Data\env\Scripts\python.exe
+[0m09:16:59.554071 [info ] [MainThread]: os info: Windows-11-10.0.26200-SP0
+[0m09:16:59.586588 [info ] [MainThread]: Using profiles dir at C:\Users\Micha\.dbt
+[0m09:16:59.587030 [info ] [MainThread]: Using profiles.yml file at C:\Users\Micha\.dbt\profiles.yml
+[0m09:16:59.587427 [info ] [MainThread]: Using dbt_project.yml file at P:\Netflix_Data\dbt_project.yml
+[0m09:16:59.594670 [info ] [MainThread]: adapter type: postgres
+[0m09:16:59.595137 [info ] [MainThread]: adapter version: 1.10.0
+[0m09:16:59.595483 [info ] [MainThread]: Configuration:
+[0m09:16:59.595870 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m09:16:59.596141 [info ] [MainThread]:   dbt_project.yml file [[31mERROR not found[0m]
+[0m09:16:59.596450 [info ] [MainThread]: Required dependencies:
+[0m09:16:59.596733 [debug] [MainThread]: Executing "git --help"
+[0m09:16:59.604467 [info ] [MainThread]:  - git [[31mERROR[0m]
+
+[0m09:16:59.604813 [info ] [MainThread]: Connection:
+[0m09:16:59.605086 [info ] [MainThread]:   host: 132
+[0m09:16:59.605303 [info ] [MainThread]:   port: 5432
+[0m09:16:59.605568 [info ] [MainThread]:   user: 123
+[0m09:16:59.605815 [info ] [MainThread]:   database: netflix
+[0m09:16:59.606019 [info ] [MainThread]:   schema: raw
+[0m09:16:59.606302 [info ] [MainThread]:   connect_timeout: 10
+[0m09:16:59.606544 [info ] [MainThread]:   role: None
+[0m09:16:59.606873 [info ] [MainThread]:   search_path: None
+[0m09:16:59.607111 [info ] [MainThread]:   keepalives_idle: 0
+[0m09:16:59.607333 [info ] [MainThread]:   sslmode: None
+[0m09:16:59.607530 [info ] [MainThread]:   sslcert: None
+[0m09:16:59.607713 [info ] [MainThread]:   sslkey: None
+[0m09:16:59.607897 [info ] [MainThread]:   sslrootcert: None
+[0m09:16:59.608090 [info ] [MainThread]:   application_name: dbt
+[0m09:16:59.608273 [info ] [MainThread]:   retries: 1
+[0m09:16:59.608591 [info ] [MainThread]: Registered adapter: postgres=1.10.0
+[0m09:16:59.797385 [debug] [MainThread]: Acquiring new postgres connection 'debug'
+[0m09:17:02.962186 [debug] [MainThread]: Using postgres connection "debug"
+[0m09:17:02.962493 [debug] [MainThread]: On debug: select 1 as id
+[0m09:17:02.962667 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m09:17:12.689824 [error] [MainThread]: Encountered an error:
+
+[0m09:17:12.695200 [error] [MainThread]: Traceback (most recent call last):
+  File "P:\Netflix_Data\env\Lib\site-packages\dbt\adapters\base\connections.py", line 237, in retry_connection
+    connection.handle = connect()
+                        ~~~~~~~^^
+  File "P:\Netflix_Data\env\Lib\site-packages\dbt\adapters\postgres\connections.py", line 144, in connect
+    handle = psycopg2.connect(
+        dbname=credentials.database,
+    ...<5 lines>...
+        **kwargs,
+    )
+  File "P:\Netflix_Data\env\Lib\site-packages\psycopg2\__init__.py", line 135, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: could not translate host name "132" to address: Name or service not known
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "P:\Netflix_Data\env\Lib\site-packages\dbt\cli\requires.py", line 182, in wrapper
+    result, success = func(*args, **kwargs)
+                      ~~~~^^^^^^^^^^^^^^^^^
+  File "P:\Netflix_Data\env\Lib\site-packages\dbt\cli\requires.py", line 128, in wrapper
+    return func(*args, **kwargs)
+  File "P:\Netflix_Data\env\Lib\site-packages\dbt\cli\main.py", line 420, in debug
+    results = task.run()
+  File "P:\Netflix_Data\env\Lib\site-packages\dbt\task\debug.py", line 144, in run
+    connection_status = self.test_connection()
+  File "P:\Netflix_Data\env\Lib\site-packages\dbt\task\debug.py", line 465, in test_connection
+    connection_result = self.attempt_connection(self.profile)
+  File "P:\Netflix_Data\env\Lib\site-packages\dbt\task\debug.py", line 443, in attempt_connection
+    adapter.debug_query()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "P:\Netflix_Data\env\Lib\site-packages\dbt\adapters\postgres\impl.py", line 157, in debug_query
+    self.execute("select 1 as id")
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "P:\Netflix_Data\env\Lib\site-packages\dbt_common\record.py", line 538, in record_replay_wrapper
+    return func_to_record(*call_args, **kwargs)
+  File "P:\Netflix_Data\env\Lib\site-packages\dbt\adapters\base\impl.py", line 471, in execute
+    return self.connections.execute(sql=sql, auto_begin=auto_begin, fetch=fetch, limit=limit)
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "P:\Netflix_Data\env\Lib\site-packages\dbt\adapters\sql\connections.py", line 219, in execute
+    _, cursor = self.add_query(sql, auto_begin)
+                ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "P:\Netflix_Data\env\Lib\site-packages\dbt\adapters\sql\connections.py", line 147, in add_query
+    cursor = connection.handle.cursor()
+             ^^^^^^^^^^^^^^^^^
+  File "P:\Netflix_Data\env\Lib\site-packages\dbt\adapters\contracts\connection.py", line 96, in handle
+    self._handle.resolve(self)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "P:\Netflix_Data\env\Lib\site-packages\dbt\adapters\contracts\connection.py", line 120, in resolve
+    return self.opener(connection)
+           ~~~~~~~~~~~^^^^^^^^^^^^
+  File "P:\Netflix_Data\env\Lib\site-packages\dbt\adapters\postgres\connections.py", line 176, in open
+    return cls.retry_connection(
+           ~~~~~~~~~~~~~~~~~~~~^
+        connection,
+        ^^^^^^^^^^^
+    ...<4 lines>...
+        retryable_exceptions=retryable_exceptions,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "P:\Netflix_Data\env\Lib\site-packages\dbt\adapters\base\connections.py", line 241, in retry_connection
+    except tuple(retryable_exceptions) as e:
+           ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+
+[0m09:17:12.697362 [debug] [MainThread]: Command `dbt debug` failed at 09:17:12.697183 after 13.26 seconds
+[0m09:17:12.697623 [debug] [MainThread]: Connection 'debug' was properly closed.
+[0m09:17:12.697867 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002485D6A7E10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002485DB8C3B0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002485DA348D0>]}
+[0m09:17:12.698143 [debug] [MainThread]: Flushing usage events
+[0m09:17:13.147968 [debug] [MainThread]: An error was encountered while trying to flush usage events
