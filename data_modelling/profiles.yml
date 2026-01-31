@@ -3,10 +3,10 @@ data_modelling:
     dev:
       type: postgres
       threads: 10
-      host: "{{ env_var('DB_HOST') }}"
-      user: "{{ env_var('DB_USER') }}"
-      password: "{{ env_var('DB_PASSWORD') }}"
-      dbname: "{{ env_var('DB_DBNAME') }}"
+      host: "{{ env_var('DB_HOST', 'localhost') }}"
+      user: "{{ env_var('DB_USER', 'db_user') }}"
+      password: "{{ env_var('DB_PASSWORD', '') }}"
+      dbname: "{{ env_var('DB_DBNAME', 'dbt') }}"
       port: 5432 
       schema: raw
       sslmode: require
