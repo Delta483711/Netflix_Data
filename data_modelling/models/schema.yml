@@ -20,16 +20,26 @@ models:
           - not_null  
       - name: director    
         description: "Director of the show."
+        tests:
+          - not_null
       - name: actors
         description: "Main actors members of the show."
+        tests:
+          - not_null
       - name: country
         description: "Country where the show was produced."
+        tests:
+          - not_null
       - name: release_date
         description: "date when the show was released."
       - name: rating
         description: "Content rating of the show."
+        tests:
+          - not_null
       - name: duration
-        description: "Duration of the show."    
+        description: "Duration of the show."
+        tests:
+          - not_null    
       - name: type
         description: "Type of content (e.g., Movie, TV Show)."
         tests:
