@@ -18,7 +18,7 @@ SELECT
 FROM 
     raw."NetflixData"
 )
-FV
+
 SELECT * FROM raw_netflix
 
 
