@@ -16,7 +16,7 @@ SELECT
     CASE
         WHEN duration ilike '%season%'
             THEN CAST(regexp_replace(duration, '[^0-9]', '', 'g') AS INT)
-        END AS duration_season
+        END AS duration_season,
     type,
     description
 FROM
