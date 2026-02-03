@@ -33,6 +33,5 @@ models:
   data_modelling:
     example:
       +materialized: table
-
     mart:
       +schema: mart
