@@ -4,7 +4,7 @@
 SELECT 
     f.show_id,
     f.duration_min,
-    f.duration_seasons,
+    f.duration_season,
     f2.category_id,
     f3.title_id
 
