@@ -34,7 +34,7 @@ jobs:
     env:
         DB_HOST: ${{ secrets.DB_HOST }}
         DB_USER: ${{ secrets.DB_USER }}
-        DB_PASS: ${{ secrets.DB_PASSWORD }}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         DB_DBNAME: ${{ secrets.DB_DBNAME }}
 
     steps:
@@ -51,9 +51,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install dbt-postgres
 
-      - name: Debug environment variables (optional)
+      - name: Check DB_PASSWORD exists  # <-- add it here
         run: |
-          echo "Secrets loaded successfully!"
+          if [ -z "$DB_PASSWORD" ]; then
+            echo "DB_PASSWORD is EMPTY ❌"
+            exit 1
+          else
+            echo "DB_PASSWORD is set ✅"
+          fi
 
       - name: Run dbt clean
         run: dbt clean --profiles-dir . --target dev
