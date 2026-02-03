@@ -14,8 +14,7 @@ WITH source AS (
         COALESCE("Rating", 'Unknown') AS rating,
         COALESCE("Duration", 'Unknown') AS duration,
         COALESCE("Type", 'Unknown') AS type,
-        COALESCE("Description", 'Unknown') AS description,
-        NULL AS TestColumn    
+        COALESCE("Description", 'Unknown') AS description
     FROM raw."NetflixData"
 
 ),
