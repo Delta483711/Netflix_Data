@@ -1,15 +1,16 @@
 name: Pipline_Run
 
 on:
-  push:
-    branches:
-      - main
-      - 'dbt/**'
-    paths:
-      - 'data_modelling/models/**'
-      - 'data_modelling/macros/**'
-      - 'data_modelling/tests/**'
-      - 'data_modelling/dbt_project.yml'
+
+  # push:
+  #   branches:
+  #     - main
+  #     - 'dbt/**'
+  #   paths:
+  #     - 'data_modelling/models/**'
+  #     - 'data_modelling/macros/**'
+  #     - 'data_modelling/tests/**'
+  #     - 'data_modelling/dbt_project.yml'
 
   pull_request:
     branches:
