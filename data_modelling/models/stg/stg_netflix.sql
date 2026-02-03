@@ -1,5 +1,3 @@
--- SQL file for the stg_netflix model.
--- This model extracts and cleans data from the raw Netflix dataset.
 
 WITH source AS (
 
@@ -15,32 +13,18 @@ WITH source AS (
         COALESCE("Duration", 'Unknown') AS duration,
         COALESCE("Type", 'Unknown') AS type,
         COALESCE("Description", 'Unknown') AS description,
-        NULL AS TestColumn    
+        NULL AS TestColumn
     FROM raw."NetflixData"
-
-),
-
-ranked AS (
-
-    SELECT
-        *,
-        row_number() OVER (
-            PARTITION BY show_id
-            ORDER BY release_date DESC, title DESC
-        ) AS rn
-    FROM source
 
 ),
 
 deduped AS (
 
+    -- Deduplicate rows by show_id, keeping the latest release_date first
     SELECT *
-    FROM ranked
-    WHERE rn = 1
+    FROM {{ deduplicate('source', 'show_id', 'release_date desc, title desc') }}
 
 )
 
 SELECT *
-FROM deduped
-
-
+FROM deduped;
