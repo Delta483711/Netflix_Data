@@ -43,4 +43,4 @@ FROM
     Filtered_Netflix
 )
 
-SELECT * FROM UpdateDuration;
+SELECT * FROM UpdateDuration
