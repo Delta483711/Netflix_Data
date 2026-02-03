@@ -22,24 +22,26 @@ on:
 
   workflow_dispatch:
 
-jobs:
-  debug:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "Workflow triggered on $GITHUB_EVENT_NAME"
+concurrency:
+  group: dbt-${{ github.ref }}
+  cancel-in-progress: true
 
+jobs:
   build:
     name: Run dbt Data Quality Checks
     runs-on: ubuntu-latest
+
     env:
-        DB_HOST: ${{ secrets.DB_HOST }}
-        DB_USER: ${{ secrets.DB_USER }}
-        DB_PASS: ${{ secrets.DB_PASS }}
-        DB_DBNAME: ${{ secrets.DB_DBNAME }}
+      DB_HOST: ${{ secrets.DB_HOST }}
+      DB_USER: ${{ secrets.DB_USER }}
+      DB_PASS: ${{ secrets.DB_PASS }}
+      DB_DBNAME: ${{ secrets.DB_DBNAME }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -51,18 +53,35 @@ jobs:
           python -m pip install --upgrade pip
           pip install dbt-postgres
 
-      - name: Debug environment variables (optional)
-        run: |
-          echo "Secrets loaded successfully!"
-
-      - name: Run dbt clean
+      - name: dbt clean
         run: dbt clean --profiles-dir . --target dev
         working-directory: ./data_modelling
 
-      - name: Run dbt deps
+      - name: dbt deps
         run: dbt deps --profiles-dir . --target dev
         working-directory: ./data_modelling
 
-      - name: Run dbt build
-        run: dbt build --profiles-dir . --target dev
+      # -----------------------------
+      # PR = Slim CI (modified models)
+      # -----------------------------
+      - name: Save dbt state (main branch)
+        if: github.event_name == 'pull_request'
+        run: |
+          git fetch origin main:main
+          dbt compile --profiles-dir . --target dev --state ./ --defer
+        working-directory: ./data_modelling
+
+      - name: dbt build (PR slim CI)
+        if: github.event_name == 'pull_request'
+        run: |
+          dbt build --profiles-dir . --target dev --select state:modified+ --defer --state .
+        working-directory: ./data_modelling
+
+      # -----------------------------
+      # Push to main = Full build
+      # -----------------------------
+      - name: dbt build (main full build)
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          dbt build --profiles-dir . --target dev
         working-directory: ./data_modelling
