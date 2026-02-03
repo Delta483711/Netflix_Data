@@ -1,0 +1,68 @@
+name: Pipline_Run
+
+on:
+  push:
+    branches:
+      - main
+      - 'feature/dbt/**'
+    paths:
+      - 'data_modelling/models/**'
+      - 'data_modelling/macros/**'
+      - 'data_modelling/tests/**'
+      - 'data_modelling/dbt_project.yml'
+
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'data_modelling/models/**'
+      - 'data_modelling/macros/**'
+      - 'data_modelling/tests/**'
+      - 'data_modelling/dbt_project.yml'
+
+  workflow_dispatch:
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Workflow triggered on $GITHUB_EVENT_NAME"
+
+  build:
+    name: Run dbt Data Quality Checks
+    runs-on: ubuntu-latest
+    env:
+        DB_HOST: ${{ secrets.DB_HOST }}
+        DB_USER: ${{ secrets.DB_USER }}
+        DB_PASS: ${{ secrets.DB_PASS }}
+        DB_DBNAME: ${{ secrets.DB_DBNAME }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dbt
+        run: |
+          python -m pip install --upgrade pip
+          pip install dbt-postgres
+
+      - name: Debug environment variables (optional)
+        run: |
+          echo "Secrets loaded successfully!"
+
+      - name: Run dbt clean
+        run: dbt clean --profiles-dir . --target dev
+        working-directory: ./data_modelling
+
+      - name: Run dbt deps
+        run: dbt deps --profiles-dir . --target dev
+        working-directory: ./data_modelling
+
+      - name: Run dbt build
+        run: dbt build --profiles-dir . --target dev
+        working-directory: ./data_modelling
