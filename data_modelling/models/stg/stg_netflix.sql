@@ -14,7 +14,8 @@ SELECT
     COALESCE("Rating", 'Unknown') AS rating,
     COALESCE("Duration", 'Unknown') AS duration,
     COALESCE("Type", 'Unknown') AS type,
-    COALESCE("Description", 'Unknown') AS description    
+    COALESCE("Description", 'Unknown') AS description,
+    null AS TestColumn    
 FROM 
     raw."NetflixData"
 )
