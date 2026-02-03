@@ -41,6 +41,6 @@ deduped AS (
 )
 
 SELECT *
-FROM deduped;
+FROM deduped
 
 
