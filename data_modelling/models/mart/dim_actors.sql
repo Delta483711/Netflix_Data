@@ -4,7 +4,7 @@ SELECT
     SPLIT(actors, ',')  AS actor_name
 FROM (
     SELECT DISTINCT 
-        actor_name   
+        actors   
     FROM 
         {{ ref('int_netflix') }}
 ) t 
