@@ -6,8 +6,9 @@ SELECT
     f.duration_min,
     f.duration_season,
     f2.category_id,
-    f3.title_id
-
+    f3.title_id,
+    f4.actor_id
+    
 FROM 
     {{ ref('int_netflix') }} AS f
 LEFT JOIN {{ ref('dim_category') }} AS f2
