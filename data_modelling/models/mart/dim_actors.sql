@@ -1,10 +1,10 @@
-
-SELECT 
-    row_number() OVER () AS actor_id,  -- generate a unique ID
-    SPLIT(actors, ',')  AS actor_name
+SELECT
+    row_number() OVER () AS actor_id,
+    actor_name
 FROM (
-    SELECT DISTINCT 
-        actors   
-    FROM 
-        {{ ref('int_netflix') }}
-) t 
+    SELECT DISTINCT
+        trim(actor_name) AS actor_name
+    FROM {{ ref('int_netflix') }},
+    unnest(string_to_array(actors, ',')) AS actor_name
+    WHERE actors IS NOT NULL
+) t
