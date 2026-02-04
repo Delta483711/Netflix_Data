@@ -14,3 +14,5 @@ LEFT JOIN {{ ref('dim_category') }} AS f2
         on f.category = f2.category_name    
 LEFT JOIN {{ ref('dim_titles') }} AS f3
         on f3.title = f.title
+LEFT JOIN {{ ref('dim_actors') }} AS f4
+        ON f4.actor_name = ANY(string_to_array(f.actors, ','))
