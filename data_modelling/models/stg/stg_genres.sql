@@ -4,7 +4,7 @@ WITH source AS (
 )
 
 SELECT
-    s.show_id,
+    s.id,
     TRIM(a.genre) AS genre
 FROM source s
 CROSS JOIN LATERAL unnest(string_to_array(s.type, ',')) AS a(genre)
