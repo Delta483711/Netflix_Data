@@ -2,14 +2,23 @@
 
 WITH source AS (
 
-SELECT DISTINCT
+SELECT
     *
 FROM 
     {{ ref('int_netflix') }}
 
+),
+
+filtered_source AS (
+SELECT DISTINCT
+    id,
+    category,
+    duration_min,
+    duration_season
+
+FROM 
+    source
 )
 
-SELECT
-*
- FROM source
- 
+select * from filtered_source
+
