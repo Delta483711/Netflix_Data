@@ -57,7 +57,7 @@ SELECT
     *
 FROM
     genres
-LEFT JOIN {{ ref('dim_genres') }}
+LEFT JOIN {{ ref('dim_genre') }}
 on genres.genre_name = g.genre_name
 
 ),
