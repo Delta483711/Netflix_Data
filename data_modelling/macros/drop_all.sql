@@ -1,18 +1,18 @@
-{% macro drop_all() %}
+{% macro drop_schema(schema_name) %}
+{% if execute %}
+    {% set sql %}
+        DO $$
+        DECLARE r RECORD;
+        BEGIN
+            FOR r IN SELECT tablename FROM pg_tables WHERE schemaname='{{ schema_name }}' LOOP
+                EXECUTE 'DROP TABLE IF EXISTS {{ schema_name }}.' || quote_ident(r.tablename) || ' CASCADE';
+            END LOOP;
 
-{# Loop over all models in the project and drop them #}
-{% for model in graph.nodes.values() if model.resource_type == 'model' %}
-    {% if execute %}
-        {% do log("Dropping model: " ~ model.name, info=True) %}
-        {% set sql %}
-            {% if model.materialized == 'view' %}
-                drop view if exists {{ model.schema }}.{{ model.identifier }} cascade;
-            {% else %}
-                drop table if exists {{ model.schema }}.{{ model.identifier }} cascade;
-            {% endif %}
-        {% endset %}
-        {{ run_query(sql) }}
-    {% endif %}
-{% endfor %}
-
+            FOR r IN SELECT table_name FROM information_schema.views WHERE table_schema='{{ schema_name }}' LOOP
+                EXECUTE 'DROP VIEW IF EXISTS {{ schema_name }}.' || quote_ident(r.table_name) || ' CASCADE';
+            END LOOP;
+        END$$;
+    {% endset %}
+    {{ run_query(sql) }}
+{% endif %}
 {% endmacro %}
