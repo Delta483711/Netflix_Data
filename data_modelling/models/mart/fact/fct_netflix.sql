@@ -30,7 +30,7 @@ actors AS (
 SELECT
     *       
 FROM
-    {{ ref('bridge_actors') }}
+    {{ ref('bridge_actor') }}
 
 ),
 
@@ -39,7 +39,7 @@ genres AS (
 SELECT
     *   
 FROM
-    {{ ref('bridge_genres') }}  
+    {{ ref('bridge_genre') }}  
 ),
 
 
