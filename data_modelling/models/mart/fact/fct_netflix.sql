@@ -36,7 +36,8 @@ FROM
 
 final_actors AS (
 SELECT
-    *
+    a.id,
+    a.actor_id
 from 
     actors a
 LEFT JOIN {{ ref('dim_actors') }} b
@@ -47,14 +48,15 @@ on a.actor_id = b.actor_id
 genres AS ( 
 
 SELECT
-    *   
+    *
 FROM
     {{ ref('bride_genre') }}  
 ),
 
 final_genres AS (
 SELECT
-    *
+    a.id,
+    a.genre_id
 FROM
     genres a
 LEFT JOIN {{ ref('dim_genre') }} b
