@@ -1,16 +1,10 @@
--- Split the actors list into individual rows
-
-WITH source  AS (
-
-SELECT 
-    *
-FROM
-     {{ ref('stg_netflix') }}
+WITH source AS (
+    SELECT *
+    FROM {{ ref('stg_netflix') }}
 )
 
-SELECT  
-    id,
-    TRIM(f.value) AS actor_name
-FROM
-    source
-LATERAL FLATTEN(input => SPLIT(actors, ',')) f
+SELECT
+    s.id,
+    TRIM(a.actor_name) AS actor_name
+FROM source s
+CROSS JOIN LATERAL unnest(string_to_array(s.actors, ',')) AS a(actor_name)
