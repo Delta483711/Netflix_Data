@@ -14,7 +14,7 @@ SELECT
     *   
 FROM    
     {{ ref('dim_actors') }}
-),
+)
 
 SELECT
     s.id,
