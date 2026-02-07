@@ -63,7 +63,7 @@ netflix_with_genres as (
 )
 
 SELECT
-    show_id,
+    show_id as title_id,
     category,
     title,
     director,
