@@ -105,7 +105,7 @@ FROM
 LEFT JOIN actors AS a
     ON j.id = a.id
 ),  
-join_genres AS (
+final AS (
 SELECT      
     j.id,
     j.duration_min,
@@ -122,6 +122,6 @@ LEFT JOIN genres AS g
     ON j.id = g.id  
 )
 
-SELECT * FROM join_genres
+SELECT * FROM final
 
 
