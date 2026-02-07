@@ -1,6 +1,6 @@
 -- INT model for Netflix data, transforming and cleaning the data from the staging layer
 
-WITH Filtered_Netflix AS (
+WITH filtered_netflix AS (
     SELECT *
     FROM {{ ref('stg_netflix') }}
 )
@@ -19,4 +19,4 @@ SELECT
     type,
     description
 FROM 
-    netflix_with_genres
+    filtered_netflix
