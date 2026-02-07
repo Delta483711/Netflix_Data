@@ -50,7 +50,8 @@ SELECT DISTINCT
     f.duration_min,
     f.duration_season,
     f.rating,
-    f.country
+    f.country,
+    f.category
 
 FROM 
     source AS f
@@ -65,6 +66,7 @@ SELECT
     f.duration_season,
     f.rating,
     f.country,
+    f.category,
     t.title_id
 FROM
     unique_netflix AS f
@@ -79,12 +81,13 @@ SELECT
     j.duration_season,
     j.rating,
     j.country,
+    j.category
     j.title_id,
     c.category_id
 from 
     join_titles AS j
 LEFT JOIN categories AS c
-    ON j.id = c.id
+    ON j.category = c.category_name
 ),  
 
 join_actors AS (
