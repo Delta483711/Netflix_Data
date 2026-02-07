@@ -32,7 +32,7 @@ netflix_with_actors as (
         n.duration_season,
         n.type,
         n.description,
-        a.actors
+        a.actor_name
     FROM 
         Filtered_Netflix AS n
     LEFT JOIN actors_table AS a 
@@ -54,8 +54,8 @@ netflix_with_genres as (
         n.duration_min,
         n.duration_season,
         n.description,
-        n.actors,
-        g.genres
+        n.actor_name,
+        g.genre
     FROM 
         netflix_with_actors AS n
     LEFT JOIN genres_table AS g 
@@ -74,7 +74,7 @@ SELECT
     COALESCE(duration_min, 0) AS duration_min,
     COALESCE(duration_season, 0) AS duration_season,
     description,
-    actors,
-    genres
+    actor_name,
+    genre
 FROM 
     netflix_with_genres
