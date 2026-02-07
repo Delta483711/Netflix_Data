@@ -38,9 +38,9 @@ final_actors AS (
 SELECT
     *
 from 
-    actors
-LEFT JOIN {{ ref('dim_actors') }}
-on actors.actor_name = a.actor_name
+    actors a
+LEFT JOIN {{ ref('dim_actors') }} b
+on a.actor_id = b.actor_id
 
 ),
 
@@ -56,9 +56,9 @@ final_genres AS (
 SELECT
     *
 FROM
-    genres
-LEFT JOIN {{ ref('dim_genre') }}
-on genres.genre_name = g.genre_name
+    genres a
+LEFT JOIN {{ ref('dim_genre') }} b
+on a.genre_id = b.genre_id
 
 ),
 
