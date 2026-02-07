@@ -11,7 +11,7 @@ FROM
 actors AS (
 SELECT
     row_number() OVER () AS actor_id,  -- generate a unique ID
-    actor AS actor_name
+    actor_name 
 FROM    
     source 
 
