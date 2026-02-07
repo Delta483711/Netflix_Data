@@ -34,12 +34,32 @@ FROM
 
 ),
 
+final_actors AS (
+SELECT
+    *
+from 
+    actors
+LEFT JOIN {{ ref('dim_actors') }}
+on actors.actor_name = a.actor_name
+
+),
+
 genres AS ( 
 
 SELECT
     *   
 FROM
     {{ ref('bride_genre') }}  
+),
+
+final_genres AS (
+SELECT
+    *
+FROM
+    genres
+LEFT JOIN {{ ref('dim_genres') }}
+on genres.genre_name = g.genre_name
+
 ),
 
 
@@ -92,8 +112,8 @@ SELECT
     a.actor_id
 FROM 
     join_category AS f
-LEFT JOIN actors AS a
-    ON f.id = a.id  
+LEFT JOIN final_actors AS a
+    ON f.id = a.id
 ),
 
 join_genres AS (
@@ -108,7 +128,7 @@ SELECT
     g.genre_id
 FROM 
     join_actors AS f
-LEFT JOIN genres AS g
+LEFT JOIN final_genres AS g
     ON f.id = g.id
 )
 
