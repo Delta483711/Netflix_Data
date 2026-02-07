@@ -3,10 +3,10 @@
 WITH Filtered_Netflix AS (
     SELECT *
     FROM {{ ref('stg_netflix') }}
-),
+)
 
 SELECT
-  id,
+    id,
     category,
     title,
     director,
