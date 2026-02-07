@@ -2,11 +2,19 @@
 
 WITH source AS (
 
-SELECT DISTINCT
+SELECT
     *
 FROM 
     {{ ref('int_netflix') }}
 
+),
+
+category AS (
+
+SELECT 
+    *
+FROM
+    {{ ref('dim_category') }} 
 ),
 
 titles AS (
@@ -14,15 +22,8 @@ titles AS (
 SELECT 
     *
 FROM
-    {{ ref('dim_titles') }}
-),
-
-categories AS (
-
-SELECT 
-    *
-FROM
-    {{ ref('dim_category') }} 
+    
+      {{ ref('dim_titles') }}
 ),
 
 actors AS (
@@ -58,7 +59,7 @@ FROM
 
  ),
 
-join_titles AS (
+join_category AS (
 
 SELECT
     f.id,
@@ -67,12 +68,13 @@ SELECT
     f.rating,
     f.country,
     f.category,
-    t.title_id
+    c.category_id
+
 FROM
     unique_netflix AS f
-LEFT JOIN titles AS t
-    ON f.id = t.id  
+LEFT JOIN category AS c
+    ON f.category = t.category_name  
 )
 
 
-select * from join_titles
+select * from join_category
