@@ -1,7 +1,5 @@
 name: dbt_Pipeline_Run
 
-
-
 on:
   # Trigger on commits to main or dbt/** branches
   push:
@@ -25,14 +23,14 @@ on:
   #     - 'data_modelling/dbt_project.yml'
 
   # Trigger on pull requests to main
-  pull_request:
-    branches:
-      - main
-    paths:
-      - 'data_modelling/models/**'
-      - 'data_modelling/macros/**'
-      - 'data_modelling/tests/**'
-      - 'data_modelling/dbt_project.yml'
+ # pull_request:
+ #   branches:
+ #     - main
+ #   paths:
+ #     - 'data_modelling/models/**'
+ #     - 'data_modelling/macros/**'
+ #     - 'data_modelling/tests/**'
+ #     - 'data_modelling/dbt_project.yml'
 
   # Manual trigger
   workflow_dispatch:
