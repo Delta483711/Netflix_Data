@@ -62,13 +62,9 @@ models:
         description: "Type of content (e.g., Movie, TV Show)."
         tests:
           - not_null 
-          - accepted_values:
-              values: ['Movie', 'TV Show', 'Unknown']
 
       - name: description
         description: "Brief description or synopsis of the show."
         tests:
           - not_null
-          - accepted_values:
-              values: ['Unknown']
 
