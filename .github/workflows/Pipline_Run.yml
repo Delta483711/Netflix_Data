@@ -64,14 +64,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install dbt-postgres
 
-      - name: Check DB_PASSWORD exists
-        run: |
-          if [ -z "$DB_PASSWORD" ]; then
-            echo "DB_PASSWORD is EMPTY ❌"
-            exit 1
-          else
-            echo "DB_PASSWORD is set ✅"
-          fi
+#      - name: Check DB_PASSWORD exists
+#        run: |
+#          if [ -z "$DB_PASSWORD" ]; then
+#            echo "DB_PASSWORD is EMPTY ❌"
+#            exit 1
+#          else
+#            echo "DB_PASSWORD is set ✅"
+#          fi
 
       - name: Drop all dbt models from dev schema
         run: dbt run-operation drop_all --profiles-dir . --target dev
