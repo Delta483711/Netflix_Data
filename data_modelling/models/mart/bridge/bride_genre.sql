@@ -5,7 +5,7 @@ WITH source AS (
 SELECT
     *   
 FROM
-     {{ ref('stg_genre') }}   
+     {{ ref('stg_genres') }}   
 
 ),
 
