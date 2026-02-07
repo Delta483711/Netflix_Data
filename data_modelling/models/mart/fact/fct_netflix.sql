@@ -81,7 +81,7 @@ SELECT
     j.duration_season,
     j.rating,
     j.country,
-    j.category
+    j.category,
     j.title_id,
     c.category_id
 from 
