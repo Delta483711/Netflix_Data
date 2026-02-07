@@ -18,7 +18,7 @@ WITH source AS (
                 THEN CAST(regexp_replace("Duration", '[^0-9]', '', 'g') AS INT)
             END AS duration_min,
         CASE
-            WHEN "Duration" like '%season%'
+            WHEN "Duration" ilike '%season%'
                 THEN CAST(regexp_replace("Duration", '[^0-9]', '', 'g') AS INT)
             END AS duration_season,
         COALESCE("Type", 'Unknown') AS type,
