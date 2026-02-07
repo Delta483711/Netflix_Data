@@ -4,10 +4,12 @@
         DO $$
         DECLARE r RECORD;
         BEGIN
+            -- Drop all tables
             FOR r IN SELECT tablename FROM pg_tables WHERE schemaname='{{ schema_name }}' LOOP
                 EXECUTE 'DROP TABLE IF EXISTS {{ schema_name }}.' || quote_ident(r.tablename) || ' CASCADE';
             END LOOP;
 
+            -- Drop all views
             FOR r IN SELECT table_name FROM information_schema.views WHERE table_schema='{{ schema_name }}' LOOP
                 EXECUTE 'DROP VIEW IF EXISTS {{ schema_name }}.' || quote_ident(r.table_name) || ' CASCADE';
             END LOOP;
