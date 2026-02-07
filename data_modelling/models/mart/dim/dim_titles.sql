@@ -11,7 +11,7 @@ WITH distinct_titles AS (
 SELECT
     row_number() OVER () AS title_id,  -- unique numeric ID
     id,
-    title,
+    title as title_name,
     description,
     release_date
 FROM distinct_titles

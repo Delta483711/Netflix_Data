@@ -53,7 +53,6 @@ SELECT DISTINCT
     f.rating,
     f.country,
     f.category
-
 FROM 
     source AS f
 
@@ -69,7 +68,6 @@ SELECT
     f.country,
     f.category,
     c.category_id
-
 FROM
     unique_netflix AS f
 LEFT JOIN category AS c
