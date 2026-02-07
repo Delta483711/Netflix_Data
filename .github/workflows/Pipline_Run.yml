@@ -74,7 +74,7 @@ jobs:
 #          fi
 
       - name: Drop all dbt models from dev schema
-        run: dbt run-operation drop_schema --args '{"schema_name": "dev"}' --profiles-dir . --target dev
+        run: dbt run-operation drop_all --args '{"schema_name": "dev"}' --profiles-dir . --target dev
         working-directory: ./data_modelling
 
       - name: Clean local dbt artifacts
