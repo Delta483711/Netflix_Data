@@ -1,7 +1,19 @@
-name: Pipline_Run
+name: dbt_Pipeline_Run
+
+
 
 on:
-
+  # Trigger on commits to main or dbt/** branches
+  push:
+    branches:
+      - main
+      - 'dbt/**'
+    paths:
+      - 'data_modelling/models/**'
+      - 'data_modelling/macros/**'
+      - 'data_modelling/tests/**'
+      - 'data_modelling/dbt_project.yml'
+      
   # push:
   #   branches:
   #     - main
@@ -12,6 +24,7 @@ on:
   #     - 'data_modelling/tests/**'
   #     - 'data_modelling/dbt_project.yml'
 
+  # Trigger on pull requests to main
   pull_request:
     branches:
       - main
@@ -21,6 +34,7 @@ on:
       - 'data_modelling/tests/**'
       - 'data_modelling/dbt_project.yml'
 
+  # Manual trigger
   workflow_dispatch:
 
 jobs:
@@ -30,13 +44,13 @@ jobs:
       - run: echo "Workflow triggered on $GITHUB_EVENT_NAME"
 
   build:
-    name: Run dbt Data Quality Checks
+    name: Run dbt Full Fresh Build
     runs-on: ubuntu-latest
     env:
-        DB_HOST: ${{ secrets.DB_HOST }}
-        DB_USER: ${{ secrets.DB_USER }}
-        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-        DB_DBNAME: ${{ secrets.DB_DBNAME }}
+      DB_HOST: ${{ secrets.DB_HOST }}
+      DB_USER: ${{ secrets.DB_USER }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      DB_DBNAME: ${{ secrets.DB_DBNAME }}
 
     steps:
       - name: Checkout repository
@@ -52,7 +66,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install dbt-postgres
 
-      - name: Check DB_PASSWORD exists  # <-- add it here
+      - name: Check DB_PASSWORD exists
         run: |
           if [ -z "$DB_PASSWORD" ]; then
             echo "DB_PASSWORD is EMPTY ❌"
@@ -60,19 +74,19 @@ jobs:
           else
             echo "DB_PASSWORD is set ✅"
           fi
-      
-      - name: Drop all dbt models
+
+      - name: Drop all dbt models from dev schema
         run: dbt run-operation drop_all --profiles-dir . --target dev
         working-directory: ./data_modelling
 
-      - name: Run dbt clean
+      - name: Clean local dbt artifacts
         run: dbt clean --profiles-dir . --target dev
         working-directory: ./data_modelling
 
-      - name: Run dbt deps
+      - name: Install dbt dependencies
         run: dbt deps --profiles-dir . --target dev
         working-directory: ./data_modelling
 
-      - name: Run dbt build
+      - name: Build all dbt models
         run: dbt build --profiles-dir . --target dev
         working-directory: ./data_modelling
