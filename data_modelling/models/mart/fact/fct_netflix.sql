@@ -74,6 +74,7 @@ SELECT
     f.duration_min,
     f.duration_season,
     f.title_id,
+    f.category,
     c.category_id
 FROM join_titles AS f
 LEFT JOIN category AS c
