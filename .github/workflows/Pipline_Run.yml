@@ -73,18 +73,20 @@ jobs:
 #            echo "DB_PASSWORD is set ✅"
 #          fi
 
-      - name: Drop all dbt models from dev schema
-        run: dbt run-operation drop_all --profiles-dir . --target dev
-        working-directory: ./data_modelling
+      - name: Drop all tables/views in dev schema
+        run: dbt run-operation drop_schema --args '{"schema_name": "dev"}' --profiles-dir . --target dev
 
-      - name: Clean local dbt artifacts
+      - name: Clean dbt artifacts
         run: dbt clean --profiles-dir . --target dev
-        working-directory: ./data_modelling
 
       - name: Install dbt dependencies
         run: dbt deps --profiles-dir . --target dev
-        working-directory: ./data_modelling
 
-      - name: Build all dbt models
-        run: dbt build --profiles-dir . --target dev
-        working-directory: ./data_modelling
+      - name: Build staging models
+        run: dbt run --models stg_* --profiles-dir . --target dev
+
+      - name: Build dimension models
+        run: dbt run --models dim_* --profiles-dir . --target dev
+
+      - name: Build fact models
+        run: dbt run --models fct_* --profiles-dir . --target dev
