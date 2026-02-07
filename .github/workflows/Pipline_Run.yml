@@ -35,15 +35,18 @@ jobs:
           pip install dbt-postgres
 
       - name: Drop staging schema
-        run: dbt run-operation drop_schema --args '{"schema_name": "staging"}' --profiles-dir . --target dev
+        run: |
+          dbt run-operation drop_schema --args '{"schema_name": "staging"}' --profiles-dir . --target dev
         working-directory: ./data_modelling
 
       - name: Drop intermediate schema
-        run: dbt run-operation drop_schema --args '{"schema_name": "intermediate"}' --profiles-dir . --target dev
+        run: |
+          dbt run-operation drop_schema --args '{"schema_name": "intermediate"}' --profiles-dir . --target dev
         working-directory: ./data_modelling
 
       - name: Drop mart schema
-        run: dbt run-operation drop_schema --args '{"schema_name": "mart"}' --profiles-dir . --target dev
+        run: |
+          dbt run-operation drop_schema --args '{"schema_name": "mart"}' --profiles-dir . --target dev
         working-directory: ./data_modelling
 
   build_models:
@@ -76,6 +79,6 @@ jobs:
         run: dbt deps --profiles-dir . --target dev
         working-directory: ./data_modelling
 
-      - name: Build all dbt models
+      - name: Build all models
         run: dbt build --profiles-dir . --target dev
         working-directory: ./data_modelling
