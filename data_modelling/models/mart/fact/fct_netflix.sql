@@ -73,11 +73,11 @@ SELECT
     f.id,
     f.duration_min,
     f.duration_season,
-    t.title_id,
+    f.title_id,
     c.category_id
-FROM join_titles AS j
+FROM join_titles AS f
 LEFT JOIN category AS c
-    ON j.category = c.category_name
+    ON f.category = c.category_name
 )
 
 SELECT * FROM join_category
