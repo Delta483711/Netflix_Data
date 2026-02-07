@@ -22,7 +22,7 @@ categories AS (
 SELECT 
     *
 FROM
-    {{ ref('dim_categories') }} 
+    {{ ref('dim_category') }} 
 ),
 
 actors AS (
