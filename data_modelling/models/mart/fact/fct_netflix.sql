@@ -87,6 +87,7 @@ SELECT
     f.duration_min,
     f.duration_season,
     f.title_id,
+    f.category,
     f.category_id,
     a.actor_id
 FROM 
