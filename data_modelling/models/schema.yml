@@ -4,7 +4,7 @@ models:
   - name: stg_netflix
     description: "This model contains the schema for Netflix data including shows, ratings, and user interactions."
     columns:
-      - name: show_id
+      - name: id
         description: "Unique identifier for each show."
         tests:
           - not_null
