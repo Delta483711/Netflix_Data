@@ -12,13 +12,13 @@ WITH source AS (
         COALESCE("Country", 'Unknown') AS country,
         CAST("Release_Date" AS DATE)  AS release_date,  
         COALESCE("Rating", 'Unknown') AS rating,
-        COALESCE("Duration", 'Unknown') AS og_duration,
+        COALESCE("Duration", 'Unknown') AS original_duration,
         CASE
             WHEN "Duration" like '%min%'
                 THEN CAST(regexp_replace("Duration", '[^0-9]', '', 'g') AS INT)
             END AS duration_min,
         CASE
-            WHEN "Duration" ilike '%season%'
+            WHEN "Duration" like '%season%'
                 THEN CAST(regexp_replace("Duration", '[^0-9]', '', 'g') AS INT)
             END AS duration_season,
         COALESCE("Type", 'Unknown') AS type,

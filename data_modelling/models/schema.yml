@@ -8,43 +8,67 @@ models:
         description: "Unique identifier for each show."
         tests:
           - not_null
+
           - unique
       - name: category
         description: "Category or genre of the show."
         tests:
           - not_null
+
       - name: title 
         description: "Title of the show."
         tests:
           - not_null  
+
       - name: director    
         description: "Director of the show."
         tests:
           - not_null
+
       - name: actors
         description: "Main actors members of the show."
         tests:
           - not_null
+
       - name: country
         description: "Country where the show was produced."
         tests:
           - not_null
+
       - name: release_date
         description: "date when the show was released."
+        
       - name: rating
         description: "Content rating of the show."
         tests:
           - not_null
-      - name: duration
-        description: "Duration of the show."
+
+      - name: original_duration
+        description: "Original duration of the show."
         tests:
-          - not_null    
+          - not_null
+
+      - name: duration_min
+            description: "Duration of the show in minutes."
+            tests:
+              - not_null
+
+      - name: duration_season
+            description: "Duration of the show in seasons."
+            tests:
+              - not_null
+
       - name: type
         description: "Type of content (e.g., Movie, TV Show)."
         tests:
           - not_null 
+          - accepted_values:
+              values: ['Movie', 'TV Show', 'Unknown']
+
       - name: description
         description: "Brief description or synopsis of the show."
         tests:
           - not_null
+          - accepted_values:
+              values: ['Unknown']
 
