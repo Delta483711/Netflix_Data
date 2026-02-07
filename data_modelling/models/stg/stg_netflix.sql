@@ -4,15 +4,23 @@
 WITH source AS (
 
     SELECT 
-        "Show_Id" AS show_id, 
+        CAST(TRIM("Show_Id", 's') AS INT ) AS show_id,
         COALESCE("Category", 'Unknown') AS category,
         COALESCE("Title", 'Unknown') AS title,
         COALESCE("Director", 'Unknown') AS director,
         COALESCE("Cast", 'Unknown') AS actors,
         COALESCE("Country", 'Unknown') AS country,
-        "Release_Date" AS release_date,
+        CAST("Release_Date" AS DATE)  AS release_date,  
         COALESCE("Rating", 'Unknown') AS rating,
-        COALESCE("Duration", 'Unknown') AS duration,
+        COALESCE("Duration", 'Unknown') AS og_duration,
+        CASE
+            WHEN "Duration" like '%min%'
+                THEN CAST(regexp_replace("Duration", '[^0-9]', '', 'g') AS INT)
+            END AS duration_min,
+        CASE
+            WHEN "Duration" ilike '%season%'
+                THEN CAST(regexp_replace("Duration", '[^0-9]', '', 'g') AS INT)
+            END AS duration_season,
         COALESCE("Type", 'Unknown') AS type,
         COALESCE("Description", 'Unknown') AS description
     FROM raw."NetflixData"
