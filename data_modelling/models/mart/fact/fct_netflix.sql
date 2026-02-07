@@ -101,6 +101,20 @@ SELECT
 FROM join_titles AS f
 LEFT JOIN category AS c
     ON f.category = c.category_name
-)
+),
 
-SELECT * FROM join_category
+join_actors AS (    
+SELECT
+    f.id,
+    f.duration_min,
+    f.duration_season,
+    f.title_id,
+    f.category_id,
+    a.actor_id
+FROM
+    join_category AS f
+LEFT JOIN final_actors AS a
+    ON f.id = a.id
+
+)
+SELECT * FROM join_actors
