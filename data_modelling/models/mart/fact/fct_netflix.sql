@@ -1,6 +1,6 @@
 -- This model transforms the intermediate netflix data for final consumption
 
-WITH unique_netfixl AS (
+WITH unique_netflix AS (
 
 SELECT DISTINCT
     f.id,
@@ -14,4 +14,4 @@ FROM
 
  )
 
-SELECT * FROM unique_netfixl
+SELECT * FROM unique_netflix
