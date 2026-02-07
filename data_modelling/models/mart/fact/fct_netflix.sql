@@ -39,7 +39,7 @@ genres AS (
 SELECT
     *   
 FROM
-    {{ ref('bridge_genre') }}  
+    {{ ref('bride_genre') }}  
 ),
 
 
