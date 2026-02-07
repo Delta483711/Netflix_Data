@@ -15,7 +15,6 @@ SELECT DISTINCT
     category,
     duration_min,
     duration_season
-
 FROM 
     source
 )
