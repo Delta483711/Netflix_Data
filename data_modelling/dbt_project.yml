@@ -31,6 +31,23 @@ clean-targets:         # directories to be removed by `dbt clean`
 # files using the `{{ config(...) }}` macro.
 models:
   data_modelling:
+
+    # Staging models
+    stg:
+      +schema: staging        # dbt will build all staging models in 'staging' schema
+      +materialized: view # staging models as views (lightweight)
+
+    # Intermediate models
+    int:
+      +schema: intermediate        # intermediate models in 'intermediate' schema
+      +materialized: view # can also be table if needed
+
+     # Mart (dimensions & facts)
     mart:
-      +schema: mart
+      +schema: mart 
       +materialized: table
+      models:
+        mart.fact_*:
+          +materialized: table
+        mart.dim_*:
+          +materialized: table
