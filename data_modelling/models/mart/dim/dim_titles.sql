@@ -5,7 +5,8 @@ WITH distinct_titles AS (
         title,
         description,
         release_date,
-        rating
+        rating,
+        country
     FROM {{ ref('int_netflix') }}
 )
 
@@ -15,5 +16,6 @@ SELECT
     title as title_name,
     description,
     release_date,
-    rating
+    rating,
+    country
 FROM distinct_titles

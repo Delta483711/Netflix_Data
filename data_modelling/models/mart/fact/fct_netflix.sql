@@ -2,22 +2,70 @@
 
 WITH source AS (
 
-SELECT
+SELECT 
     *
 FROM 
     {{ ref('int_netflix') }}
 
 ),
 
-filtered_source AS (
+titles AS (
+
+SELECT 
+    *
+FROM
+    {{ ref('dim_titles') }}
+),
+
+category AS (
+
+SELECT 
+    *
+FROM
+    {{ ref('dim_category') }} 
+),
+
+actors AS (
+
+SELECT
+    *       
+FROM
+    {{ ref('bridge_actor') }}
+
+),
+
+genres AS ( 
+
+SELECT
+    *   
+FROM
+    {{ ref('bride_genre') }}  
+),
+
+
+unique_netflix AS (
+
 SELECT DISTINCT
-    id,
-    category,
-    duration_min,
-    duration_season
+    f.id,
+    f.duration_min,
+    f.duration_season,
+    f.category
 FROM 
-    source
+    source AS f
+
+ ),
+
+join_titles AS (
+SELECT
+    f.id,
+    f.duration_min,
+    f.duration_season,
+    f.category,
+    t.title_id
+FROM 
+    unique_netflix AS f
+LEFT JOIN titles AS t
+    ON f.id = t.id  
 )
 
-select * from filtered_source
-
+select * from join_titles
