@@ -17,7 +17,7 @@ FROM
 ),
 
 SELECT
-    s.title_id,
+    s.id,
     a.actor_id
 FROM source s
 JOIN actors a

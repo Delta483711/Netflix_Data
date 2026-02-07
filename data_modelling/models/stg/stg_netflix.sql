@@ -4,7 +4,7 @@
 WITH source AS (
 
     SELECT 
-        CAST(TRIM("Show_Id", 's') AS INT ) AS show_id,
+        CAST(TRIM("Show_Id", 's') AS INT ) AS id,
         COALESCE("Category", 'Unknown') AS category,
         COALESCE("Title", 'Unknown') AS title,
         COALESCE("Director", 'Unknown') AS director,

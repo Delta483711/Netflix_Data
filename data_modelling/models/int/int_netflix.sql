@@ -20,7 +20,7 @@ genres_table AS (
 netflix_with_actors as (
 
     SELECT
-        n.show_id,
+        n.id,
         n.category,
         n.title,
         n.director,
@@ -36,14 +36,14 @@ netflix_with_actors as (
     FROM 
         Filtered_Netflix AS n
     LEFT JOIN actors_table AS a 
-        ON n.show_id = a.show_id
+        ON n.id = a.id
 ),
 
 -- Join Netflix to genres
 netflix_with_genres as (
 
     SELECT
-        n.show_id,
+        n.id,
         n.category,
         n.title,
         n.director,
@@ -59,11 +59,11 @@ netflix_with_genres as (
     FROM 
         netflix_with_actors AS n
     LEFT JOIN genres_table AS g 
-        ON n.show_id = g.show_id
+        ON n.id = g.id
 )
 
 SELECT
-    show_id as title_id,
+    id,
     category,
     title,
     director,

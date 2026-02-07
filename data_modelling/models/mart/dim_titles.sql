@@ -1,7 +1,7 @@
 -- dim_titles.sql
 WITH distinct_titles AS (
     SELECT DISTINCT
-        show_id,
+        id,
         title,
         description,
         release_date
@@ -10,7 +10,7 @@ WITH distinct_titles AS (
 
 SELECT
     row_number() OVER () AS title_id,  -- unique numeric ID
-    show_id,
+    id,
     title,
     description,
     release_date
