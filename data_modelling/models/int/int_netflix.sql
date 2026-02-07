@@ -1,29 +1,80 @@
 -- INT model for Netflix data, transforming and cleaning the data from the staging layer
-WITH Filtered_Netflix AS (
-SELECT 
-    *
-FROM
-     {{ ref('stg_netflix') }} 
 
+WITH Filtered_Netflix AS (
+    SELECT *
+    FROM {{ ref('stg_netflix') }}
 ),
 
-UpdateDuration AS (
-SELECT 
+actors_table AS (
+    SELECT *
+    FROM {{ ref('stg_actors') }}
+),
+
+genres_table AS (
+    SELECT *
+    FROM {{ ref('stg_genres') }}
+),
+
+-- Join Netflix to actors
+
+netflix_with_actors as (
+
+    SELECT
+        n.show_id,
+        n.category,
+        n.title,
+        n.director,
+        n.country,
+        n.release_date,
+        n.rating,
+        n.original_duration,
+        n.duration_min,
+        n.duration_season,
+        n.type,
+        n.description,
+        a.actors
+    FROM 
+        Filtered_Netflix AS n
+    LEFT JOIN actors_table AS a 
+        ON n.show_id = a.show_id
+),
+
+-- Join Netflix to genres
+netflix_with_genres as (
+
+    SELECT
+        n.show_id,
+        n.category,
+        n.title,
+        n.director,
+        n.country,
+        n.release_date,
+        n.rating,
+        n.original_duration,
+        n.duration_min,
+        n.duration_season,
+        n.description,
+        n.actors,
+        g.genres
+    FROM 
+        netflix_with_actors AS n
+    LEFT JOIN genres_table AS g 
+        ON n.show_id = g.show_id
+)
+
+SELECT
     show_id,
     category,
     title,
     director,
-    actors,
     country,
     release_date,
     rating,
+    original_duration,
     COALESCE(duration_min, 0) AS duration_min,
     COALESCE(duration_season, 0) AS duration_season,
-    type,
-    description
-
-FROM
-    Filtered_Netflix
-)
-
-SELECT * FROM UpdateDuration
+    description,
+    actors,
+    genres
+FROM 
+    netflix_with_genres
