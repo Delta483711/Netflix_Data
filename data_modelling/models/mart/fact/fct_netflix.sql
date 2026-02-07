@@ -65,16 +65,60 @@ SELECT
     f.duration_season,
     f.rating,
     f.country,
-    t.title
+    t.title_id
 FROM
     unique_netflix AS f
 LEFT JOIN titles AS t
     ON f.id = t.id  
+),
+
+join_categories AS (
+SELECT
+    j.id,
+    j.duration_min,
+    j.duration_season,
+    j.rating,
+    j.country,
+    j.title_id,
+    c.category_id
+from 
+    join_titles AS j
+LEFT JOIN categories AS c
+    ON j.id = c.id
+),  
+
+join_actors AS (
+SELECT
+    j.id,
+    j.duration_min,
+    j.duration_season,
+    j.rating,
+    j.country,
+    j.title_id,
+    j.category_id,
+    a.actor_id  
+FROM
+    join_categories AS j
+LEFT JOIN actors AS a
+    ON j.id = a.id
+),  
+join_genres AS (
+SELECT      
+    j.id,
+    j.duration_min,
+    j.duration_season,
+    j.rating,
+    j.country,
+    j.title_id,
+    j.category_id,
+    j.actor_id,
+    g.genre_id  
+FROM
+    join_actors AS j    
+LEFT JOIN genres AS g
+    ON j.id = g.id  
 )
 
-SELECT
-*
-FROM 
-    join_titles
+SELECT * FROM join_genres
 
 
