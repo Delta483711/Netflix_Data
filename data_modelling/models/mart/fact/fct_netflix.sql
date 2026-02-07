@@ -73,7 +73,7 @@ SELECT
 FROM
     unique_netflix AS f
 LEFT JOIN category AS c
-    ON f.category = t.category_name  
+    ON f.category = c.category_name  
 )
 
 
