@@ -25,46 +25,6 @@ FROM
     {{ ref('dim_category') }} 
 ),
 
-actors AS (
-
-SELECT
-    *       
-FROM
-    {{ ref('bridge_actor') }}
-
-),
-
-final_actors AS (
-SELECT
-    a.id,
-    a.actor_id
-from 
-    actors a
-LEFT JOIN {{ ref('dim_actors') }} b
-on a.actor_id = b.actor_id
-
-),
-
-genres AS ( 
-
-SELECT
-    *
-FROM
-    {{ ref('bride_genre') }}  
-),
-
-final_genres AS (
-SELECT
-    a.id,
-    a.genre_id
-FROM
-    genres a
-LEFT JOIN {{ ref('dim_genre') }} b
-on a.genre_id = b.genre_id
-
-),
-
-
 unique_netflix AS (
 
 SELECT DISTINCT
@@ -90,7 +50,7 @@ LEFT JOIN titles AS t
     ON f.id = t.id  
 ),
 
-join_category AS (
+final AS (
 SELECT
     f.id,
     f.duration_min,
@@ -101,20 +61,13 @@ SELECT
 FROM join_titles AS f
 LEFT JOIN category AS c
     ON f.category = c.category_name
-),
-
-join_actors AS (    
-SELECT
-    f.id,
-    f.duration_min,
-    f.duration_season,
-    f.title_id,
-    f.category_id,
-    a.actor_id
-FROM
-    join_category AS f
-LEFT JOIN final_actors AS a
-    ON f.id = a.id
-
 )
-SELECT * FROM join_actors
+
+SELECT 
+    id,
+    duration_min,
+    duration_season,
+    title_id,
+    category_id
+FROM final
+

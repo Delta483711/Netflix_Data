@@ -2,17 +2,12 @@
 -- It will be used to join with the bridge table to get the actor's name for each netflix title.
 
 WITH source AS (
-    SELECT TRIM(actor_name) AS actor_name
-    FROM {{ ref('int_netflix') }}
-),
-
-unique_actors AS (
-    SELECT DISTINCT actor_name
-    FROM source
+    SELECT DISTINCT TRIM(actor_name) AS actor_name
+    FROM {{ ref('stg_actors') }}
+    WHERE TRIM(actor_name) <> ''
 )
 
 SELECT
     ROW_NUMBER() OVER (ORDER BY actor_name) AS actor_id,
     actor_name
-FROM unique_actors
-
+FROM source

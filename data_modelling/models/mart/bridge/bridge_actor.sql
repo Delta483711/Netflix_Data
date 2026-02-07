@@ -5,7 +5,7 @@ WITH source AS (
 SELECT
     *   
 FROM
-     {{ ref('int_netflix') }}   
+     {{ ref('stg_actors') }}   
 
 ),
 
