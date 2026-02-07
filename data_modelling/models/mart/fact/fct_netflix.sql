@@ -101,46 +101,6 @@ SELECT
 FROM join_titles AS f
 LEFT JOIN category AS c
     ON f.category = c.category_name
-),
-
-join_actors AS (
-SELECT
-    f.id,
-    f.duration_min,
-    f.duration_season,
-    f.title_id,
-    f.category,
-    f.category_id,
-    a.actor_id
-FROM 
-    join_category AS f
-LEFT JOIN final_actors AS a
-    ON f.id = a.id
-),
-
-join_genres AS (
-SELECT 
-    f.id,
-    f.duration_min,
-    f.duration_season,
-    f.title_id,
-    f.category,
-    f.category_id,
-    f.actor_id,
-    g.genre_id
-FROM 
-    join_actors AS f
-LEFT JOIN final_genres AS g
-    ON f.id = g.id
 )
 
-SELECT
-    id,
-    duration_min,
-    duration_season,
-    title_id,
-    category_id,
-    actor_id,
-    genre_id
-FROM
-    join_genres
+SELECT * FROM join_category
