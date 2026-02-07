@@ -1,6 +1,45 @@
 -- This model transforms the intermediate netflix data for final consumption
 
-WITH unique_netflix AS (
+
+WITH source AS (
+SELECT DISTINCT
+    *
+FROM 
+    {{ ref('int_netflix') }}
+
+),
+
+titles AS (
+SELECT 
+    *
+FROM
+    {{ ref('dim_titles') }}
+),
+
+categories AS (
+SELECT 
+    *
+FROM
+    {{ ref('dim_categories') }} 
+),
+
+actors AS (
+SELECT
+    *       
+FROM
+    {{ ref('bridge_actors') }}
+
+),
+
+genres AS ( 
+SELECT
+    *   
+FROM
+    {{ ref('bridge_genres') }}  
+),
+
+
+unique_netflix AS (
 
 SELECT DISTINCT
     f.id,
@@ -10,8 +49,28 @@ SELECT DISTINCT
     f.country
 
 FROM 
-    {{ ref('int_netflix') }} AS f
+    unique_netflix AS f
 
- )
+ ),
 
-SELECT * FROM unique_netflix
+
+ join_titles AS (
+SELECT
+    f.id,
+    f.duration_min,
+    f.duration_season,
+    f.rating,
+    f.country,
+    t.title
+FROM
+    unique_netflix AS f
+LEFT JOIN titles AS t
+    ON f.id = t.id  
+)
+
+SELECT
+*
+FROM 
+    join_titles
+
+
