@@ -66,6 +66,18 @@ FROM
     unique_netflix AS f
 LEFT JOIN titles AS t
     ON f.id = t.id  
+),
+
+join_category AS (
+SELECT
+    f.id,
+    f.duration_min,
+    f.duration_season,
+    t.title_id,
+    c.category_id
+FROM join_titles AS j
+LEFT JOIN category AS c
+    ON j.category = c.category_name
 )
 
-select * from join_titles
+SELECT * FROM join_category
