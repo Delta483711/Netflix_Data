@@ -32,7 +32,7 @@ ranked AS (
     SELECT
         *,
         row_number() OVER (
-            PARTITION BY show_id
+            PARTITION BY id
             ORDER BY release_date DESC, title DESC
         ) AS rn
     FROM source
