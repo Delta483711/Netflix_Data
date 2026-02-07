@@ -1,17 +1,17 @@
 -- This model transforms the intermediate netflix data for final consumption
 
+WITH unique_netfixl AS (
 
-SELECT 
+SELECT DISTINCT
     f.id,
     f.duration_min,
     f.duration_season,
-    f2.category_id,
-    f3.title_id
-    
+    f.rating,
+    f.country
+
 FROM 
     {{ ref('int_netflix') }} AS f
-LEFT JOIN {{ ref('dim_category') }} AS f2
-        on f.category = f2.category_name    
-LEFT JOIN {{ ref('dim_titles') }} AS f3
-        on f3.title = f.title
 
+ )
+
+SELECT * FROM unique_netfixl
