@@ -4,7 +4,7 @@ WITH source AS (
 SELECT DISTINCT
     TRIM(genre) AS genre
 FROM
-     {{ ref('stg_genre') }}
+     {{ ref('stg_genres') }}
 )
 
 SELECT
