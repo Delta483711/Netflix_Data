@@ -56,23 +56,7 @@ SELECT DISTINCT
 FROM 
     source AS f
 
- ),
-
-join_category AS (
-
-SELECT
-    f.id,
-    f.duration_min,
-    f.duration_season,
-    f.rating,
-    f.country,
-    f.category,
-    c.category_id
-FROM
-    unique_netflix AS f
-LEFT JOIN category AS c
-    ON f.category = c.category_name  
-)
+ )
 
 
-select * from join_category
+select * from unique_netflix
