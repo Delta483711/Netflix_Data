@@ -53,7 +53,7 @@ SELECT DISTINCT
     f.country
 
 FROM 
-    unique_netflix AS f
+    source AS f
 
  ),
 
