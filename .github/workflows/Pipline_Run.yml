@@ -60,6 +60,10 @@ jobs:
           else
             echo "DB_PASSWORD is set ✅"
           fi
+      
+      - name: Drop all dbt models
+        run: dbt run-operation drop_all --profiles-dir . --target dev
+        working-directory: ./data_modelling
 
       - name: Run dbt clean
         run: dbt clean --profiles-dir . --target dev
