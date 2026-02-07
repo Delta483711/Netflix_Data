@@ -44,10 +44,14 @@ models:
 
      # Mart (dimensions & facts)
     mart:
-      +schema: mart 
-      +materialized: table
-      models:
-        mart.fact_*:
-          +materialized: table
-        mart.dim_*:
-          +materialized: table
+      +schema: mart
+
+      dim:
+        +materialized: table
+
+      bridge:
+        +materialized: table
+ 
+      fact:
+        +materialized: incremental
+        +unique_key: id
