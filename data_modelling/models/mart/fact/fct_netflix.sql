@@ -1,7 +1,7 @@
 -- This model transforms the intermediate netflix data for final consumption
 
-
 WITH source AS (
+
 SELECT DISTINCT
     *
 FROM 
@@ -10,6 +10,7 @@ FROM
 ),
 
 titles AS (
+
 SELECT 
     *
 FROM
@@ -17,6 +18,7 @@ FROM
 ),
 
 categories AS (
+
 SELECT 
     *
 FROM
@@ -24,6 +26,7 @@ FROM
 ),
 
 actors AS (
+
 SELECT
     *       
 FROM
@@ -32,6 +35,7 @@ FROM
 ),
 
 genres AS ( 
+
 SELECT
     *   
 FROM
@@ -53,8 +57,8 @@ FROM
 
  ),
 
+join_titles AS (
 
- join_titles AS (
 SELECT
     f.id,
     f.duration_min,
