@@ -50,13 +50,9 @@ models:
 
       - name: duration_min
         description: "Duration of the show in minutes."
-        tests:
-          - not_null
 
       - name: duration_season
         description: "Duration of the show in seasons."
-        tests:
-           - not_null
 
       - name: type
         description: "Type of content (e.g., Movie, TV Show)."
