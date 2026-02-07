@@ -4,14 +4,18 @@ WITH distinct_titles AS (
         id,
         title,
         description,
-        release_date
+        release_date,
+        rating,
+        country
     FROM {{ ref('int_netflix') }}
 )
 
 SELECT
     row_number() OVER () AS title_id,  -- unique numeric ID
     id,
-    title,
+    title as title_name,
     description,
-    release_date
+    release_date,
+    rating,
+    country
 FROM distinct_titles
