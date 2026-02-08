@@ -32,7 +32,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install dbt-postgres
   
+      - name: Compile dbt project
+        run: dbt compile --profiles-dir . --target dev
+        working-directory: ./data_modelling
 
-      - name: Drop all dbt models from dev schema
+      - name: Drop all dbt models
         run: dbt run-operation drop_all --profiles-dir . --target dev
         working-directory: ./data_modelling
