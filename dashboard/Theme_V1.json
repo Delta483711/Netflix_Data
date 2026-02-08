@@ -104,14 +104,14 @@
         "calloutValue": [
           {
             "fontFamily": "Segoe UI Semibold",
-            "fontSize": 30,
+            "calloutValueFontSize": 20,
             "color": { "solid": { "color": "#1A1A1A" } }
           }
         ],
         "categoryLabels": [
           {
             "fontFamily": "Segoe UI",
-            "fontSize": 18,
+            "fontSize": 15,
             "color": { "solid": { "color": "#1A1A1A" } }
           }
         ],
